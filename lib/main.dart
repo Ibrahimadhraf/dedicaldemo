@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:dedicaldemo/model/filter_model.dart';
 import 'package:dedicaldemo/view/helpers/application_utils/translation/tranclation.dart';
+import 'package:dedicaldemo/view/helpers/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:filter_list/filter_list.dart';
@@ -57,37 +59,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  List<String> countList = [
-    "Cardiology / cardiac surgery",
-    "Dentistry",
-    "Dermatology",
-    "Ear, nose and throat (ENT)",
-    "Endocrinology",
-    "Gastroenterology",
-    "General surgery",
-    "Hematology",
-    "Hepatology",
-    "Internal Medicine",
-    "Nephrology",
-    "Neurology",
-    "Obstetrics and Gynecology",
-    "Oncology",
-    "Ophthalmology",
-    "Orthopedics",
-    "Pediatrics",
-    "Plastic surgery",
-    "Psychiatry",
-    "Rheumatology",
-    "Urology",
-    "Veterinary medicine",
 
+  List<FilterModel> filterList=[
+    FilterModel(specialty: "Cardiology / cardiac surgery",governorate:  "test"),
+    FilterModel(specialty: "Dentistry",),
+    FilterModel(specialty: "Dermatology",),
+    FilterModel(specialty:   "Ear, nose and throat (ENT)",),
+    FilterModel(specialty:"Endocrinology",),
+    FilterModel(specialty:  "Gastroenterology",),
+    FilterModel(specialty:  "Hematology",),
+    FilterModel(specialty:   "Internal Medicine",),
+    FilterModel(specialty: "Nephrology"),
+    FilterModel(specialty:  "Obstetrics and Gynecology",),
+    FilterModel(specialty:  "Ophthalmology",),
+    FilterModel(specialty:  "Orthopedics",),
+    FilterModel(specialty:  "Pediatrics",),
+    FilterModel(specialty:  "Plastic surgery",),
+    FilterModel(specialty:  "Urology",),
+    FilterModel(specialty:   "Veterinary medicine",),
   ];
   List<String>? selectedCountList = [];
 
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -119,34 +115,36 @@ class _MyHomePageState extends State<MyHomePage> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
+          children: const <Widget>[
+            Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _openFilterDialog,
+        onPressed: _openFilterSpecialistDialog,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-  void _openFilterDialog() async {
-    await FilterListDialog.display<String>(
+  void _openFilterSpecialistDialog() async {
+    await FilterListDialog.display<FilterModel>(
         context,
-        listData: countList,
-        selectedListData: selectedCountList,
-        height: 480,
+        useSafeArea: true,
+         listData: filterList,
+
+        height: SizeConfig().screenHeight*.85,
         headlineText: "Select Country",
+        headerTextStyle:  TextStyle(
+          color: Colors.blue,
+          fontSize: SizeConfig().fontSize16
+        ),
         searchFieldHintText: "Search Here",
         choiceChipLabel: (item) {
-          return item;
+          return item!.specialty;
         },
         validateSelectedItem: (list, val) {
           return list!.contains(val);
@@ -154,10 +152,10 @@ class _MyHomePageState extends State<MyHomePage> {
         onItemSearch: (list, text) {
 
           if (list!.any((element) =>
-              element.toLowerCase().contains(text.toLowerCase()))) {
+              element.specialty!.toLowerCase().contains(text.toLowerCase()))) {
             return list
                 .where((element) =>
-                element.toLowerCase().contains(text.toLowerCase()))
+                element.specialty!.toLowerCase().contains(text.toLowerCase()))
                 .toList();
 
           }
@@ -168,8 +166,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onApplyButtonClick: (list) {
           if (list != null) {
             setState(() {
-              selectedCountList = List.from(list);
-              log("$selectedCountList");
+
+              log("${list.last.specialty}");
             });
           }
           Navigator.pop(context);
