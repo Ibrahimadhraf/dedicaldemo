@@ -56,6 +56,8 @@ dev_dependencies:
   # Use with the    get storage package to A fast, extra light and synchronous key-value in memory,  .
   get_storage: ^2.0.3
   filter_list: ^0.0.9
+  flutter_dialogs: ^2.1.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

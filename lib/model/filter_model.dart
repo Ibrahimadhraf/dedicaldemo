@@ -1,7 +1,8 @@
-class FilterModel{
-  late List<String>? city;
-  late String? governorate;
-  late String? specialty;
+import 'package:dedicaldemo/model/main_hospital_model.dart';
 
-  FilterModel({this.city, this.governorate, this.specialty});
+class FilterModel extends MainHospitalModel{
+
+
+  FilterModel({ String? city ,String? governorate ,String? specialty}) :super(city: city ,
+  governorate:  governorate , specialty: specialty);
 }

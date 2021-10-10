@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dedicaldemo/model/filter_model.dart';
 import 'package:dedicaldemo/view/helpers/application_utils/translation/tranclation.dart';
 import 'package:dedicaldemo/view/helpers/size_config.dart';
+import 'package:dedicaldemo/view/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:filter_list/filter_list.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
 
       ),
       translations: ApplicationTranslation(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomeScreen(),
       locale: const Locale('en'),
       fallbackLocale: const Locale('en'),
     );
