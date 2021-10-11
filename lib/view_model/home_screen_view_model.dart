@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dedicaldemo/model/filter_model.dart';
 import 'package:dedicaldemo/model/hospitals_model.dart';
 import 'package:dedicaldemo/view/helpers/size_config.dart';
+import 'package:dedicaldemo/view/screens/filter_hospitals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:filter_list/filter_list.dart';
@@ -210,6 +211,7 @@ class HomeScreenViewModel extends GetxController {
             update();
           }
           Navigator.pop(Get.context!);
+          Get.to(FilterHospitals(hospitals: filterHospitalList,));
         });
   }
 }

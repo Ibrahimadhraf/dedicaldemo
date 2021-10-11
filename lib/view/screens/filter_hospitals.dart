@@ -1,4 +1,6 @@
 import 'package:dedicaldemo/model/hospitals_model.dart';
+import 'package:dedicaldemo/view/helpers/application_utils/color_utils/colors.dart';
+import 'package:dedicaldemo/view/helpers/size_config.dart';
 import 'package:dedicaldemo/view/widgets/vertical_list_view_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +10,10 @@ class FilterHospitals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: VerticalListView(
-          itemCount:ref.hospitalsList.length ,
+          itemCount: hospitals!.length ,
           listChildren:(context ,index){
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -30,17 +33,17 @@ class FilterHospitals extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text(ref.hospitalsList[index].name??"" ,
+                          Text(hospitals![index].name??"" ,
                             style:  TextStyle(
                                 fontSize: SizeConfig().fontSize16,
                                 color: Colors.black
                             ),),
-                          Text(ref.hospitalsList[index].specialty??"" ,
+                          Text(hospitals![index].specialty??"" ,
                             style:  TextStyle(
                                 fontSize: SizeConfig().fontSize14,
                                 color: Colors.black
                             ),),
-                          Text(ref.hospitalsList[index].address??"" ,
+                          Text(hospitals![index].address??"" ,
 
                             maxLines: 2,
                             style:  TextStyle(
@@ -55,7 +58,7 @@ class FilterHospitals extends StatelessWidget {
                                     fontSize: SizeConfig().fontSize13,
                                     color: Colors.white
                                 ),),
-                              Text(ref.hospitalsList[index].governorate??"" ,
+                              Text(hospitals![index].governorate??"" ,
                                 style:  TextStyle(
                                     fontSize: SizeConfig().fontSize13,
                                     color: Colors.lime
@@ -69,7 +72,7 @@ class FilterHospitals extends StatelessWidget {
                                     fontSize: SizeConfig().fontSize13,
                                     color: Colors.white
                                 ),),
-                              Text(ref.hospitalsList[index].city??"" ,
+                              Text(hospitals![index].city??"" ,
                                 style:  TextStyle(
                                     fontSize: SizeConfig().fontSize13,
                                     color: Colors.lime
