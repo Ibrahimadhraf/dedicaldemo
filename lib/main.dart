@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:dedicaldemo/model/filter_model.dart';
 import 'package:dedicaldemo/view/helpers/application_utils/translation/tranclation.dart';
 import 'package:dedicaldemo/view/helpers/size_config.dart';
+import 'package:dedicaldemo/view/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:filter_list/filter_list.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -29,11 +31,11 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
-
-
       ),
       translations: ApplicationTranslation(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Home(
+        title: "Home",
+      ),
       locale: const Locale('en'),
       fallbackLocale: const Locale('en'),
     );
@@ -59,27 +61,53 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  List<FilterModel> filterList=[
-    FilterModel(specialty: "Cardiology / cardiac surgery",governorate:  "test"),
-    FilterModel(specialty: "Dentistry",),
-    FilterModel(specialty: "Dermatology",),
-    FilterModel(specialty:   "Ear, nose and throat (ENT)",),
-    FilterModel(specialty:"Endocrinology",),
-    FilterModel(specialty:  "Gastroenterology",),
-    FilterModel(specialty:  "Hematology",),
-    FilterModel(specialty:   "Internal Medicine",),
+  List<FilterModel> filterList = [
+    FilterModel(specialty: "Cardiology / cardiac surgery", governorate: "test"),
+    FilterModel(
+      specialty: "Dentistry",
+    ),
+    FilterModel(
+      specialty: "Dermatology",
+    ),
+    FilterModel(
+      specialty: "Ear, nose and throat (ENT)",
+    ),
+    FilterModel(
+      specialty: "Endocrinology",
+    ),
+    FilterModel(
+      specialty: "Gastroenterology",
+    ),
+    FilterModel(
+      specialty: "Hematology",
+    ),
+    FilterModel(
+      specialty: "Internal Medicine",
+    ),
     FilterModel(specialty: "Nephrology"),
-    FilterModel(specialty:  "Obstetrics and Gynecology",),
-    FilterModel(specialty:  "Ophthalmology",),
-    FilterModel(specialty:  "Orthopedics",),
-    FilterModel(specialty:  "Pediatrics",),
-    FilterModel(specialty:  "Plastic surgery",),
-    FilterModel(specialty:  "Urology",),
-    FilterModel(specialty:   "Veterinary medicine",),
+    FilterModel(
+      specialty: "Obstetrics and Gynecology",
+    ),
+    FilterModel(
+      specialty: "Ophthalmology",
+    ),
+    FilterModel(
+      specialty: "Orthopedics",
+    ),
+    FilterModel(
+      specialty: "Pediatrics",
+    ),
+    FilterModel(
+      specialty: "Plastic surgery",
+    ),
+    FilterModel(
+      specialty: "Urology",
+    ),
+    FilterModel(
+      specialty: "Veterinary medicine",
+    ),
   ];
   List<String>? selectedCountList = [];
-
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +147,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'You have pushed the button this many times:',
             ),
-
           ],
         ),
       ),
@@ -130,47 +157,36 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
   void _openFilterSpecialistDialog() async {
-    await FilterListDialog.display<FilterModel>(
-        context,
+    await FilterListDialog.display<FilterModel>(context,
         useSafeArea: true,
-         listData: filterList,
-
-        height: SizeConfig().screenHeight*.85,
+        listData: filterList,
+        height: SizeConfig().screenHeight * .85,
         headlineText: "Select Country",
-        headerTextStyle:  TextStyle(
-          color: Colors.blue,
-          fontSize: SizeConfig().fontSize16
-        ),
-        searchFieldHintText: "Search Here",
-        choiceChipLabel: (item) {
-          return item!.specialty;
-        },
-        validateSelectedItem: (list, val) {
-          return list!.contains(val);
-        },
-        onItemSearch: (list, text) {
-
-          if (list!.any((element) =>
-              element.specialty!.toLowerCase().contains(text.toLowerCase()))) {
-            return list
-                .where((element) =>
+        headerTextStyle:
+            TextStyle(color: Colors.blue, fontSize: SizeConfig().fontSize16),
+        searchFieldHintText: "Search Here", choiceChipLabel: (item) {
+      return item!.specialty;
+    }, validateSelectedItem: (list, val) {
+      return list!.contains(val);
+    }, onItemSearch: (list, text) {
+      if (list!.any((element) =>
+          element.specialty!.toLowerCase().contains(text.toLowerCase()))) {
+        return list
+            .where((element) =>
                 element.specialty!.toLowerCase().contains(text.toLowerCase()))
-                .toList();
-
-          }
-          else{
-            return [];
-          }
-        },
-        onApplyButtonClick: (list) {
-          if (list != null) {
-            setState(() {
-
-              log("${list.last.specialty}");
-            });
-          }
-          Navigator.pop(context);
+            .toList();
+      } else {
+        return [];
+      }
+    }, onApplyButtonClick: (list) {
+      if (list != null) {
+        setState(() {
+          log("${list.last.specialty}");
         });
+      }
+      Navigator.pop(context);
+    });
   }
 }

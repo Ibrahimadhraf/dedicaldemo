@@ -46,7 +46,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
   # Use with the get package to handle  State management in application.
-  get: ^4.3.3
+  get: ^4.3.8
   # Use with the  keyboard_dismisser package to handle  mobile Keyboard dismiss in application.
   keyboard_dismisser: ^2.0.0
   # Use with the  http package to handle  connect with api in application.
@@ -56,6 +56,10 @@ dev_dependencies:
   # Use with the    get storage package to A fast, extra light and synchronous key-value in memory,  .
   get_storage: ^2.0.3
   filter_list: ^0.0.9
+  google_maps_flutter: any
+  location: ^4.3.0
+  dio: any
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -69,8 +73,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

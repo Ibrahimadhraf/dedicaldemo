@@ -1,0 +1,33 @@
+{
+    "status":200,
+    "data":[
+        {
+            "id":1,
+            "name":"Place 1",
+            "price":"200",
+            "img":"assets/images/img1",
+            "address":"Cairo,Elnozha",
+            "country":"Cairo",
+            "city":"cairo",
+            "latitude":133.1442121,
+            "longitude":137.1442121,
+            "url":"https://www.google.com",
+            "insurranceDiscount":30,
+            "spec_id":1
+        },
+        {
+            "id":2,
+            "name":"Place 2",
+            "price":"400",
+            "img":"assets/images/img1",
+            "address":"Cairo,Nasrcity",
+            "country":"Cairo",
+            "city":"cairo",
+            "latitude":133.1442121,
+            "longitude":137.1442121,
+            "url":"https://www.google.com",
+            "insurranceDiscount":50,
+            "spec_id":2
+        }
+    ]
+}
