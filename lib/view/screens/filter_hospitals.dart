@@ -12,6 +12,9 @@ class FilterHospitals extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: mainColor,
+      ),
       body: VerticalListView(
           itemCount: hospitals!.length ,
           listChildren:(context ,index){
