@@ -1,12 +1,11 @@
 import 'package:dedicaldemo/mock/mock_inceptors.dart';
 import 'package:dedicaldemo/model/response/places_model.dart';
 
-class PlacesRepository{
+class PlacesRepository {
+  // static Future<PlaceModel> getPlaces() async {
 
-  static Future<PlaceModel> getPlaces() async {
-
-    return await MockInterceptor().onRequest(
-      RequestOptions.
-      , v)
-  }
+  //   return await MockInterceptor().onRequest(
+  //     null
+  //     , null);
+  // }
 }
