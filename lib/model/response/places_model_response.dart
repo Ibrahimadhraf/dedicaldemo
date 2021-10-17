@@ -1,6 +1,19 @@
 import 'package:dedicaldemo/model/response/base_response.dart';
 
-class PlaceModel extends BaseResponse {
+class PlaceModelResponse extends BaseResponse {
+  late List<PlaceModel> places;
+  PlaceModelResponse.fromJson(Map<String, dynamic> json) : super(json) {
+    if (json['data'] != null) {
+      places = [];
+      List dataList = json['data'];
+      dataList.forEach((element) {
+        places.add(PlaceModel.fromJson(element));
+      });
+    }
+  }
+}
+
+class PlaceModel {
   late int id;
   late String name;
   late String price;
@@ -13,8 +26,7 @@ class PlaceModel extends BaseResponse {
   late String url;
   late int insurranceDiscount;
   late int specId;
-
-  PlaceModel.fromJson(Map<String, dynamic> json) : super(json) {
+  PlaceModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     price = json['price'];
@@ -27,22 +39,5 @@ class PlaceModel extends BaseResponse {
     url = json['url'];
     insurranceDiscount = json['insurranceDiscount'];
     specId = json['spec_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['img'] = this.img;
-    data['address'] = this.address;
-    data['country'] = this.country;
-    data['city'] = this.city;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    data['url'] = this.url;
-    data['insurranceDiscount'] = this.insurranceDiscount;
-    data['spec_id'] = this.specId;
-    return data;
   }
 }

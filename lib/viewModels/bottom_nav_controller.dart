@@ -1,9 +1,10 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-class BottomNavController extends GetxController {
-  var index = 0.obs;
+class BottomNavViewModel extends ChangeNotifier {
+  var index = 0;
 
   changeTab(int i) {
-    index.value = i;
+    index = i;
+    notifyListeners();
   }
 }

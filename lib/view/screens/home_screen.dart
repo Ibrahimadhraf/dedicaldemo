@@ -2,7 +2,7 @@ import 'package:dedicaldemo/view/helpers/application_utils/color_utils/colors.da
 import 'package:dedicaldemo/view/helpers/size_config.dart';
 import 'package:dedicaldemo/view/widgets/costume_button.dart';
 import 'package:dedicaldemo/view/widgets/vertical_list_view_widget.dart';
-import 'package:dedicaldemo/view_model/home_screen_view_model.dart';
+import 'package:dedicaldemo/viewModels/home_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';

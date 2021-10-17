@@ -3,13 +3,27 @@ import 'dart:developer';
 import 'package:dedicaldemo/model/filter_model.dart';
 import 'package:dedicaldemo/view/helpers/application_utils/translation/tranclation.dart';
 import 'package:dedicaldemo/view/helpers/size_config.dart';
-import 'package:dedicaldemo/view/screens/home_screen.dart';
+import 'package:dedicaldemo/view/screens/splash.dart';
+import 'package:dedicaldemo/viewModels/bottom_nav_controller.dart';
+import 'package:dedicaldemo/viewModels/filter_viewmodel.dart';
+import 'package:dedicaldemo/viewModels/places_viewModel.dart';
+import 'package:dedicaldemo/viewModels/speciality_viewModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:filter_list/filter_list.dart';
 
+import 'view/index.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => FilterViewModel()),
+      ChangeNotifierProvider(create: (_) => PlacesViewModel()),
+      ChangeNotifierProvider(create: (_) => SpecViewModel()),
+      ChangeNotifierProvider(create: (_) => BottomNavViewModel()),
+    ], child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +47,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       translations: ApplicationTranslation(),
-      home: HomeScreen(),
+      home: Splash(),
       locale: const Locale('en'),
       fallbackLocale: const Locale('en'),
     );

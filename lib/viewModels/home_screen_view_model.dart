@@ -7,8 +7,9 @@ import 'package:dedicaldemo/view/screens/filter_hospitals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:filter_list/filter_list.dart';
+
 class HomeScreenViewModel extends GetxController {
-  List<HospitalsModel> filterHospitalList =[];
+  List<HospitalsModel> filterHospitalList = [];
   List<FilterModel> filterList = [
     FilterModel(specialty: "Cardiology / cardiac surgery", governorate: "test"),
     FilterModel(
@@ -136,7 +137,10 @@ class HomeScreenViewModel extends GetxController {
         name: "Italian Hospital",
         address: "17 El Sarayat St, Abbassieh Abbassieh"),
     HospitalsModel(
-        specialty: "Pediatrics", id: 11, city: 'Cairo', governorate: "Cairo" ,
+        specialty: "Pediatrics",
+        id: 11,
+        city: 'Cairo',
+        governorate: "Cairo",
         name: "مستشفى الحكمة",
         address: "القصر العيني، الدواوين، عابدي،"),
     HospitalsModel(
@@ -151,12 +155,27 @@ class HomeScreenViewModel extends GetxController {
         address: " ١٥ احمد فؤاد السرايات",
         city: "Cairo",
         governorate: 'Cairo'),
-    HospitalsModel(specialty: "Veterinary medicine", id: 14 ,name: "Misr International Hospital",
-    address: "12ش السرايا، ميدان فيني",governorate: "Giza",city: "Giza"),
-    HospitalsModel(id: 15 ,specialty: "Cardiology / cardiac surgery" ,city: 'Giza',governorate: "Giza" ,
-    name: "مستشفى الجيزة التخصصى" ,address: " محمد الذكي، متفرع من شارع خاتم المرسلين الهرم ، الجيزة,"),
-    HospitalsModel(id: 16 ,name:"Al Haram Hospital" ,specialty: "Obstetrics and Gynecology" ,governorate: 'Giza',
-    city: 'Giza',address: 'Al Haram, Oula Al Haram, El Omraniya, Giza Governorate' ,
+    HospitalsModel(
+        specialty: "Veterinary medicine",
+        id: 14,
+        name: "Misr International Hospital",
+        address: "12ش السرايا، ميدان فيني",
+        governorate: "Giza",
+        city: "Giza"),
+    HospitalsModel(
+        id: 15,
+        specialty: "Cardiology / cardiac surgery",
+        city: 'Giza',
+        governorate: "Giza",
+        name: "مستشفى الجيزة التخصصى",
+        address: " محمد الذكي، متفرع من شارع خاتم المرسلين الهرم ، الجيزة,"),
+    HospitalsModel(
+      id: 16,
+      name: "Al Haram Hospital",
+      specialty: "Obstetrics and Gynecology",
+      governorate: 'Giza',
+      city: 'Giza',
+      address: 'Al Haram, Oula Al Haram, El Omraniya, Giza Governorate',
     ),
     // HospitalsModel(id: 17),
     // HospitalsModel(id: 18),
@@ -166,52 +185,44 @@ class HomeScreenViewModel extends GetxController {
     // HospitalsModel(id: 22),
   ];
   void openFilterSpecialistDialog() async {
-    await FilterListDialog.display<FilterModel>(
-        Get.context,
+    await FilterListDialog.display<FilterModel>(Get.context,
         useSafeArea: true,
         listData: filterList,
-
-        height: SizeConfig().screenHeight*.85,
+        height: SizeConfig().screenHeight * .85,
         headlineText: "Select Country",
-        headerTextStyle:  TextStyle(
-            color: Colors.blue,
-            fontSize: SizeConfig().fontSize16
-        ),
-        searchFieldHintText: "Search Here",
-        choiceChipLabel: (item) {
-          return item!.specialty;
-        },
-        validateSelectedItem: (list, val) {
-          return list!.contains(val);
-        },
-        onItemSearch: (list, text) {
-
-          if (list!.any((element) =>
-              element.specialty!.toLowerCase().contains(text.toLowerCase()))) {
-            return list
-                .where((element) =>
+        headerTextStyle:
+            TextStyle(color: Colors.blue, fontSize: SizeConfig().fontSize16),
+        searchFieldHintText: "Search Here", choiceChipLabel: (item) {
+      return item!.specialty;
+    }, validateSelectedItem: (list, val) {
+      return list!.contains(val);
+    }, onItemSearch: (list, text) {
+      if (list!.any((element) =>
+          element.specialty!.toLowerCase().contains(text.toLowerCase()))) {
+        return list
+            .where((element) =>
                 element.specialty!.toLowerCase().contains(text.toLowerCase()))
-                .toList();
+            .toList();
+      } else {
+        return [];
+      }
+    }, onApplyButtonClick: (list) {
+      if (list != null) {
+        filterHospitalList.clear();
+        for (int i = 0; i < list.length; i++) {
+          filterHospitalList.addAll(hospitalsList
+              .where((element) => element.specialty == list[i].specialty)
+              .toList());
 
-          }
-          else{
-            return [];
-          }
-        },
-        onApplyButtonClick: (list) {
-          if (list != null) {
-            filterHospitalList.clear();
-       for(int i=0; i<list.length;i++){
-           filterHospitalList.addAll(hospitalsList.where((element) => element.specialty==list[i].specialty ).toList());
-
-           log("${filterHospitalList.length}");
-
-       }
-              log("${list.last.specialty}");
-            update();
-          }
-          Navigator.pop(Get.context!);
-          Get.to(FilterHospitals(hospitals: filterHospitalList,));
-        });
+          log("${filterHospitalList.length}");
+        }
+        log("${list.last.specialty}");
+        update();
+      }
+      Navigator.pop(Get.context!);
+      Get.to(FilterHospitals(
+        hospitals: filterHospitalList,
+      ));
+    });
   }
 }
